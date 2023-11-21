@@ -4,7 +4,7 @@
  * @param {String} model
  */
 
-//  Create an instance, accelerate twice, brake once, and console log the instance.toString()
+
 
 /**
  * ElectricCar class
@@ -12,53 +12,54 @@
  * @param {String} model
  */
 
-//  Create an instance, accelerate twice, brake once, and console log the instance.toString()
-// Define the Car class
 class Car {
-    constructor(model) {
-      this.model = model;
-      this.currentSpeed = 0;
-    }
-  
-    accelerate() {
-      this.currentSpeed += 1;
-    }
-  
-    brake() {
-      this.currentSpeed -= 1;
-    }
-  
-    toString() {
-      return `Car Model: ${this.model}, Current Speed: ${this.currentSpeed}`;
+  constructor(make, model) {
+    this.make = make;
+    this.model = model;
+    this.speed = 0;
+  }
+
+  accelerate() {
+    this.speed += 10;
+  }
+
+  brake() {
+    this.speed -= 5;
+    if (this.speed < 0) {
+      this.speed = 0;
     }
   }
-  
-  // Define the ElectricCar class that inherits from Car
-  class ElectricCar extends Car {
-    constructor(model) {
-      super(model);
-      this.motor = "electric";
-    }
-  
-    accelerate() {
-      super.accelerate(); // Call the accelerate method of the parent class (Car) twice
-      super.accelerate();
-    }
-  
-    toString() {
-      return `Electric Car Model: ${this.model}, Motor: ${this.motor}, Current Speed: ${this.currentSpeed}`;
-    }
+
+  toString() {
+    return `Make: ${this.make}, Model: ${this.model}, Speed: ${this.speed} mph`;
   }
-  
-  // Create an instance of ElectricCar
-  const electricCar = new ElectricCar("Tesla Model 3");
-  
-  // Accelerate twice (faster acceleration)
-  electricCar.accelerate();
-  electricCar.accelerate();
-  
-  // Brake once
-  electricCar.brake();
-  
-  // Console log the instance using the toString method
-  console.log(electricCar.toString());
+}
+
+class ElectricCar extends Car {
+  constructor(make, model) {
+    super(make, model);
+    this.motor = "electric";
+  }
+
+  accelerate() {
+    super.accelerate(); // Call the parent class's accelerate method
+    super.accelerate(); // Call it again to accelerate twice
+  }
+
+  toString() {
+    return `Make: ${this.make}, Model: ${this.model}, Speed: ${this.speed} mph, Motor: ${this.motor}`;
+  }
+}
+
+// Create an instance of ElectricCar
+const electricCar = new ElectricCar("Tesla", "Model 3");
+
+// Accelerate twice
+electricCar.accelerate();
+electricCar.accelerate();
+
+// Brake once
+electricCar.brake();
+
+// Display car information
+console.log(electricCar.toString());
