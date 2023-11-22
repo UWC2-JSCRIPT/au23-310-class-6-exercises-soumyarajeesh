@@ -1,19 +1,30 @@
-/**
- * Toggles "done" class on <li> element
- */
+// Wrap your code in the jQuery function that ensures the DOM is fully loaded.
+ 
+  $(document).ready(function () {
+    //Toggles "done" class on <li> element
+      $(".today-list").on("click", "li", function () {
+        $(this).toggleClass("done");
+      });
 
-/**
- * Delete element when delete link clicked
- */
 
-/**
- * Adds new list item to <ul>
- */
-const addListItem = function(e) {
-  e.preventDefault();
-  const text = $('input').val();
+ //Delete element when delete link clicked
+ $(".today-list").on("click", ".delete", function () {
+        $(this).parent().fadeOut(500, function () {
+          $(this).remove();
+        });
+      });
 
-  // rest here...
-};
 
-// add listener for add
+// Adds new list item to <ul>
+ 
+
+  $(".add-item").click(function () {
+    const newItemText = $("#new-todo").val();
+    if (newItemText) {
+      const newItem = $("<li><span>" + newItemText + "</span><a class='delete'>Delete</a></li>");
+      $(".today-list").append(newItem);
+      $("#new-todo").val("");
+    }
+  });
+});
+
